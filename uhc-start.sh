@@ -2,58 +2,66 @@
 # Add direct downloads to plugins you wish to download to "plugins.txt" and this script will download them.
 ### ### Settings ### ###
 # Allow auto updates of paper?
-paperupdate=y
+paperupdate="${1:-y}"
 # Paper Minecraft Version
-mcver=1.16.5
+mcver="${2:-1.16.5}"
 # Server jar name
-jar=paperclip.jar
+jar="${3:-paperclip.jar}"
 
 # Allow Auto-updates of UhcCore?
-UHCupdate=y
+UHCupdate="${4:-y}"
 # Lock to Specific Version?
 # Leave Blank to always get latest.
-UHCver=
+UHCver="${5}"
 
 # Memory arguments, in MB - Required
-Xmx=
-Xms=
+Xmx="${6}"
+Xms="${7}"
 # Startup Arguments - Optional
-args=
+args="${8}"
 
 # EULA acceptance? - Required
-eula=false
+eula="${9:-false}"
 # https://www.minecraft.net/en-us/eula
 
 ## Server.properties
 # Level-seed
-levelseed=
+levelseed="${10}"
 
 # Level-name
-world=
+world="${11:-world}"
 
 # View-Distance
-distance=
+distance="${12:-10}"
 
 # Server Port
-port=
+port="${13:-25565}"
 
 # White-list
-whitelist=
+whitelist="${14:-false}"
 
 # max-players
-maxp=
+maxp="${15:-20}"
 
 # prevent proxy connections?
-proxy=
+proxy="${16:-true}"
 
 ## spigot.yml setup
 # Player entity tracking range
-prange=
+prange="${17:-256}"
 ### ### ### ###
-
+# Syntax
+# ./uhc-start.sh paperupdate(y/n) mcver(1.16.5) jar(paperclip.jar) UHCupdate(y/n) UHCver(v1.18) Xmx(1024) Xms(1024) args(nogui) eula(false) levelseed(1234) world(world) view-distance(10) port(25565) whitelist(false) max-players(20) block-proxy-connections(true) player-tracking-range(256)
+# if all arguments are blank give syntax
+# Unfortunately at the moment I don't know an easy way to implement setting named variables .. when I learn more then it may be included.
+fullarguments="${@}"
+if [ ! "${fullarguments}" ]; then
+	printf "Syntax: \n./uhc-start.sh paperupdate(y/n) mcver(1.16.5) jar(paperclip.jar) UHCupdate(y/n) UHCver(v1.18) Xmx(1024) Xms(1024) args(nogui) eula(false) levelseed(1234) world(world) view-distance(10) port(25565) whitelist(false) max-players(20) block-proxy-connections(true) player-tracking-range(256)\n"
+	exit 1
+fi
 #### #### Setup #### ####
 # This is to set up the directories and files required for a clean startup.
-if [ ! -d "plugins" ] || [ ! -f "eula.txt" ] || [ ! -f "server.properies" ] [ ! -f "spigot.yml"; then
+if [ ! -d "plugins" ] && [ ! -e "eula.txt" ] && [ ! -e "server.properies" ] && [ ! -e "spigot.yml" ]; then
 	mkdir "plugins"
 	touch "eula.txt"
 	echo "eula=${eula}" > "eula.txt"
@@ -64,9 +72,9 @@ if [ ! -d "plugins" ] || [ ! -f "eula.txt" ] || [ ! -f "server.properies" ] [ ! 
 	fi
 	else
 	# if files exist, then just update the configs.
-	sed -i -e "s/level-seed=.*$/level-seed=${levelseed}/" -e "s/level-name=.*$/level-name=${world}" -e "s/view-distance=.*$/view-distance=${distance}" -e "s/server-port=.*$/server-port=${port}/" -e "s/white-list=.*$/white-list=${whitelist}/" -e "s/max-players=.*$/max-players=${maxp}" -e "s/prevent-proxy-connections=.*$/prevent-proxy-connections=${proxy}" "server.properties"
-	sed -i -e "s/players: .*$/players: ${prange}" "spigot.yml"
-	sed -i -e "s/eula=.*/eula=${eula}" "eula.txt"
+	sed -i -e "s/level-seed=.*$/level-seed=${levelseed}/" -e "s/level-name=.*$/level-name=${world}/" -e "s/view-distance=.*$/view-distance=${distance}/" -e "s/server-port=.*$/server-port=${port}/" -e "s/white-list=.*$/white-list=${whitelist}/" -e "s/max-players=.*$/max-players=${maxp}/" -e "s/prevent-proxy-connections=.*$/prevent-proxy-connections=${proxy}/" "server.properties"
+	sed -i -e "s/players: .*$/players: ${prange}/" "spigot.yml"
+	sed -i -e "s/eula=.*/eula=${eula}/" "eula.txt"
 fi
 #### #### #### ####
 
@@ -108,7 +116,7 @@ if [ "${UHCupdate}" == "y" ]; then
 	fi
 fi
 # Download any link listed in the "plugins.txt" file, if it exists, then delete it.
-if [ -f "plugins.txt" }; then
+if [ -f "plugins.txt" ]; then
 	cat "plugins.txt" |
 	while read -r line; do
 		wget --quiet "${line}" -P "plugins/"
@@ -123,7 +131,7 @@ if [ ! "${Xmx}" ] || [ ! "${Xms}" ]; then
 else
 	# Now check if the memory allocation contains letters .. if so then fail.
 	checkvar=$(echo "${Xms} ${Xmx}" | grep [^0-9])
-	if [ ! "${checkvar}" ]; then
+	if [ "${checkvar}" ]; then
 		# If no arguments, then start the server as-is
 		if [ ! "${args}" ]; then
 			java -jar -Xmx"${Xmx}"M -Xms"${Xms}"M "${jar}" nogui

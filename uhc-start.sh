@@ -1,4 +1,5 @@
 #!/bin/bash
+# Add direct downloads to plugins you wish to download to "plugins.txt" and this script will download them.
 ### ### Settings ### ###
 # Allow auto updates of paper?
 paperupdate=y
@@ -105,6 +106,13 @@ if [ "${UHCupdate}" == "y" ]; then
                         wget -N --quiet "https://github.com/Mezy/UhcCore/releases/download/${UHCver}/UhcCore-${UHCver}.jar" - O "plugins/UhcCore.jar"
                 fi
 	fi
+fi
+# Download any link listed in the "plugins.txt" file, if it exists, then delete it.
+if [ -f "plugins.txt" }; then
+	cat "plugins.txt" |
+	while read -r line; do
+		wget --quiet "${line}" -P "plugins/"
+	done
 fi
 # Let's rest for a moment.
 sleep 0.5

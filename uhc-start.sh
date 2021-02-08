@@ -102,23 +102,27 @@ if [ "${UHCupdate}" == "true" ]; then
 	if [ ! "${UHCver}" ]; then
 		# Curl from https://gist.github.com/lukechilds/a83e1d7127b78fef38c2914c4ececc3c#gistcomment-2552690
 		getUHC=$(curl --silent "https://api.github.com/repos/Mezy/UhcCore/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
+		# Clean the version for the filename
+		getCleanUHC=$(echo "${getUHC}" | sed -e 's/v//')
 		echo "UhCore Version: ${getUHC}"
 		# If UhcCore plugin does not exist, then download normally.
 		if [ ! -e "plugins/UhcCore.jar" ]; then
-			wget --quiet "https://github.com/Mezy/UhcCore/releases/download/${getUHC}/UhcCore-${getUHC}.jar" -O "plugins/UhcCore.jar"
+			wget --quiet "https://github.com/Mezy/UhcCore/releases/download/${getUHC}/UhcCore-${getCleanUHC}.jar" -O "plugins/UhcCore.jar"
 		else
 		# Else, Download if file is newer
-			wget -N --quiet "https://github.com/Mezy/UhcCore/releases/download/${getUHC}/UhcCore-${getUHC}.jar" -O "plugins/UhcCore.jar"
+			wget -N --quiet "https://github.com/Mezy/UhcCore/releases/download/${getUHC}/UhcCore-${getCleanUHC}.jar" -O "plugins/UhcCore.jar"
 		fi
 	else
 	# Else, we are locked to a version... now we do the same as above, but use a different variable.
 		echo "Locked UhcCore Version: ${UHCver}"
+		# Clean the version for the filename
+		CleanUHCver=$(echo "${UHCver}" | sed -e 's/v//')
                 # If UhcCore plugin does not exist, then download normally.
                 if [ ! -e "plugins/UhcCore.jar" ]; then
-                        wget --quiet "https://github.com/Mezy/UhcCore/releases/download/${UHCver}/UhcCore-${UHCver}.jar" -O "plugins/UhcCore.jar"
+                        wget --quiet "https://github.com/Mezy/UhcCore/releases/download/${UHCver}/UhcCore-${CleanUHCver}.jar" -O "plugins/UhcCore.jar"
                 else
                 # Else, Download if file is newer
-                        wget -N --quiet "https://github.com/Mezy/UhcCore/releases/download/${UHCver}/UhcCore-${UHCver}.jar" -O "plugins/UhcCore.jar"
+                        wget -N --quiet "https://github.com/Mezy/UhcCore/releases/download/${UHCver}/UhcCore-${CleanUHCver}.jar" -O "plugins/UhcCore.jar"
                 fi
 	fi
 fi

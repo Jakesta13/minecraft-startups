@@ -147,8 +147,12 @@ else
 	# Now check if the memory allocation contains letters .. if so then fail.
 	checkvar=$(echo "${Xms} ${Xmx}" | grep [^0-9])
 	if [ "${checkvar}" ]; then
+		# Missing File Edge-case fix
+		if [ ! -e "spigot.yml" ]; then
+			touch "spigot.yml"
+		fi
 		# Check if it is the first run...
-		frun=$(find "spigot.yml" -type f -size -3k)
+		frun=$(find "spigot.yml" -type f -size -2k)
 		if [ ! -z "${frun}" ]; then
 			echo "First run, Starting and stopping server to initilize spigot.yml"
 			sleep 1

@@ -141,9 +141,9 @@ else
 	if [ "${checkvar}" ]; then
 		# If no arguments, then start the server as-is
 		if [ ! "${args}" ]; then
-			java -jar "${jar}" --Xmx"${Xmx}"M --Xms"${Xms}"M nogui
+			java -Xmx"${Xmx}"M -Xms"${Xms}"M -jar "${jar}" nogui
 		else
-			java -jar "${jar}" --Xmx"${Xmx}"M --Xms"${Xms}"M nogui
+			java -Xmx"${Xmx}"M -Xms"${Xms}"M -jar "${jar}" nogui
 		fi
 	else
 		echo "There's a non-numerical character in memory allocation variable!"

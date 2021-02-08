@@ -65,7 +65,11 @@ fi
 fixquotes () {
 sed -e 's/"//g'
 }
+# Don't change this value, it is a fail-safe to prevent an indefinate while-true loop.
+counter=0
 ## ## ## ##
+# Running this in a 'While' loop so we can do first-run setup quickly, then start the server for real.
+while [ -z "${frun}" ]; then
 #### #### Setup #### ####
 # This is to set up the directories and files required for a clean startup.
 if [ ! -d "plugins" ] && [ ! -e "eula.txt" ] && [ ! -e "server.properies" ] && [ ! -e "spigot.yml" ]; then
@@ -84,7 +88,6 @@ else
 	sed -i -e "s/eula=.*/eula=${eula}/" -e 's/"//g' "eula.txt"
 fi
 #### #### #### ####
-
 # Download paper, if allowed to
 if [ "${paperupdate}" == "true" ]; then
 	# If paperclip.jar does not exist, download normally.
@@ -128,10 +131,8 @@ if [ "${UHCupdate}" == "true" ]; then
 fi
 # Download any link listed in the "plugins.txt" file, if it exists, then delete it.
 if [ -f "plugins.txt" ]; then
-	cat "plugins.txt" |
-	while read -r line; do
-		wget --quiet "${line}" -P "plugins/"
-	done
+	wget --quiet -i "plugins.txt" -P "plugins/"
+	rm "plugins.txt"
 fi
 # Let's rest for a moment.
 sleep 0.5
@@ -143,13 +144,31 @@ else
 	# Now check if the memory allocation contains letters .. if so then fail.
 	checkvar=$(echo "${Xms} ${Xmx}" | grep [^0-9])
 	if [ "${checkvar}" ]; then
-		# If no arguments, then start the server as-is
-		if [ ! "${args}" ]; then
-			java -Xmx"${Xmx}"M -Xms"${Xms}"M -jar "${jar}" nogui
+		# Check if it is the first run...
+		frun=$(find "spigot.yml" -type f -size -3k)
+		if [ ! -z "${frun}" ]; then
+			echo "First run, Starting and stopping server to initilize spigot.yml"
+			sleep 1
+			echo "stop" | java -Xmx"${Xmx}"M -Xms"${Xms}"M -jar "${jar}" nogui
+			sleep 1
+		# If not first run, then start normally.
 		else
-			java -Xmx"${Xmx}"M -Xms"${Xms}"M -jar "${jar}" nogui
+			# If no arguments, then start the server as-is
+			if [ ! "${args}" ]; then
+				java -Xmx"${Xmx}"M -Xms"${Xms}"M -jar "${jar}" nogui
+			else
+				java -Xmx"${Xmx}"M -Xms"${Xms}"M -jar "${jar}" nogui
+			fi
 		fi
 	else
 		echo "There's a non-numerical character in memory allocation variable!"
 	fi
 fi
+# Adding a counter, so we do not get stuck forever.
+counter=$((counter + 1))
+if [ "${counter}" -eq "3" ]; then
+	echo "Well, that didn't work... Check your set-up."
+	break
+fi
+sleep 0.5
+done

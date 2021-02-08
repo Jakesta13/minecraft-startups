@@ -2,14 +2,14 @@
 # Add direct downloads to plugins you wish to download to "plugins.txt" and this script will download them.
 ### ### Settings ### ###
 # Allow auto updates of paper?
-paperupdate="${1:-y}"
+paperupdate="${1:-TRUE}"
 # Paper Minecraft Version
 mcver="${2:-1.16.5}"
 # Server jar name
 jar="${3:-paperclip.jar}"
 
 # Allow Auto-updates of UhcCore?
-UHCupdate="${4:-y}"
+UHCupdate="${4:-TRUE}"
 # Lock to Specific Version?
 # Leave Blank to always get latest.
 UHCver="${5}"
@@ -81,7 +81,7 @@ fi
 #### #### #### ####
 
 # Download paper, if allowed to
-if [ "${paperupdate}" == "y" ]; then
+if [ "${paperupdate}" == "TRUE" ]; then
 	# If paperclip.jar does not exist, download normally.
 	if [ ! -e "${jar}" ]; then
 		wget --quiet "https://papermc.io/api/v1/paper/${mcver}/latest/download" -O "${jar}"
@@ -92,7 +92,7 @@ if [ "${paperupdate}" == "y" ]; then
 fi
 
 # Download UHC, if allowed to
-if [ "${UHCupdate}" == "y" ]; then
+if [ "${UHCupdate}" == "TRUE" ]; then
 	# If we are not locked to one specific version of the plugin, then lets grab the latest.
 	if [ ! "${UHCver}" ]; then
 		# Curl from https://gist.github.com/lukechilds/a83e1d7127b78fef38c2914c4ececc3c#gistcomment-2552690

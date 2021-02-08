@@ -1,5 +1,6 @@
 #!/bin/bash
 # Add direct downloads to plugins you wish to download to "plugins.txt" and this script will download them.
+
 ### ### Settings ### ###
 # Allow auto updates of paper?
 paperupdate="${1:-true}"
@@ -140,9 +141,9 @@ else
 	if [ "${checkvar}" ]; then
 		# If no arguments, then start the server as-is
 		if [ ! "${args}" ]; then
-			java -jar "${jar}" -Xmx"${Xmx}"M -Xms"${Xms}"M nogui
+			java -jar "${jar}" --Xmx"${Xmx}"M --Xms"${Xms}"M nogui
 		else
-			java -jar "${jar}" -Xmx"${Xmx}"M -Xms"${Xms}"M nogui
+			java -jar "${jar}" --Xmx"${Xmx}"M --Xms"${Xms}"M nogui
 		fi
 	else
 		echo "There's a non-numerical character in memory allocation variable!"

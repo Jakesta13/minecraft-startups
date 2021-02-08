@@ -101,24 +101,24 @@ if [ "${UHCupdate}" == "true" ]; then
 	# If we are not locked to one specific version of the plugin, then lets grab the latest.
 	if [ ! "${UHCver}" ]; then
 		# Curl from https://gist.github.com/lukechilds/a83e1d7127b78fef38c2914c4ececc3c#gistcomment-2552690
-		getUHC=$(curl --silent "https://api.github.com/repos/$1/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
+		getUHC=$(curl --silent "https://api.github.com/repos/Mezy/UhcCore/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
 		echo "UhCore Version: ${getUHC}"
 		# If UhcCore plugin does not exist, then download normally.
-		if [ ! -e "plugins/UhcCure.jar" ]; then
-			wget --quiet "https://github.com/Mezy/UhcCore/releases/download/${getUHC}/UhcCore-${getUHC}.jar" - O "plugins/UhcCore.jar"
+		if [ ! -e "plugins/UhcCore.jar" ]; then
+			wget --quiet "https://github.com/Mezy/UhcCore/releases/download/${getUHC}/UhcCore-${getUHC}.jar" -O "plugins/UhcCore.jar"
 		else
 		# Else, Download if file is newer
-			wget -N --quiet "https://github.com/Mezy/UhcCore/releases/download/${getUHC}/UhcCore-${getUHC}.jar" - O "plugins/UhcCore.jar"
+			wget -N --quiet "https://github.com/Mezy/UhcCore/releases/download/${getUHC}/UhcCore-${getUHC}.jar" -O "plugins/UhcCore.jar"
 		fi
 	else
 	# Else, we are locked to a version... now we do the same as above, but use a different variable.
 		echo "Locked UhcCore Version: ${UHCver}"
                 # If UhcCore plugin does not exist, then download normally.
-                if [ ! -e "plugins/UhcCure.jar" ]; then
-                        wget --quiet "https://github.com/Mezy/UhcCore/releases/download/${UHCver}/UhcCore-${UHCver}.jar" - O "plugins/UhcCore.jar"
+                if [ ! -e "plugins/UhcCore.jar" ]; then
+                        wget --quiet "https://github.com/Mezy/UhcCore/releases/download/${UHCver}/UhcCore-${UHCver}.jar" -O "plugins/UhcCore.jar"
                 else
                 # Else, Download if file is newer
-                        wget -N --quiet "https://github.com/Mezy/UhcCore/releases/download/${UHCver}/UhcCore-${UHCver}.jar" - O "plugins/UhcCore.jar"
+                        wget -N --quiet "https://github.com/Mezy/UhcCore/releases/download/${UHCver}/UhcCore-${UHCver}.jar" -O "plugins/UhcCore.jar"
                 fi
 	fi
 fi

@@ -69,12 +69,14 @@ if [ ! -d "plugins" ] && [ ! -e "eula.txt" ] && [ ! -e "server.properies" ] && [
 	if [ ! -e "server.properties" ]; then
 		printf "level-seed=${levelseed}\nlevel-name=${world}\nview-distance=${distance}\nserver-port=${port}\nwhite-list=${whitelist}\nmax-players=${maxp}\nprevent-proxy-connections=${proxy}" > "server.properties"
 		printf "    entity-tracking-range:\n      players: ${prange}" > "spigot.yml"
+sed -i 's/"//g' "server.properties"
 	fi
 	else
 	# if files exist, then just update the configs.
 	sed -i -e "s/level-seed=.*$/level-seed=${levelseed}/" -e "s/level-name=.*$/level-name=${world}/" -e "s/view-distance=.*$/view-distance=${distance}/" -e "s/server-port=.*$/server-port=${port}/" -e "s/white-list=.*$/white-list=${whitelist}/" -e "s/max-players=.*$/max-players=${maxp}/" -e "s/prevent-proxy-connections=.*$/prevent-proxy-connections=${proxy}/" "server.properties"
 	sed -i -e "s/players: .*$/players: ${prange}/" "spigot.yml"
 	sed -i -e "s/eula=.*/eula=${eula}/" "eula.txt"
+sed -i 's/"//g' "server.properties"
 fi
 #### #### #### ####
 

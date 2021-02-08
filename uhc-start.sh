@@ -138,8 +138,11 @@ fi
 sleep 0.5
 # Finally ... Start the server.
 # If no Xms or Xmx Arguments ... fail!
-if [ ! "${Xmx}" ] || [ ! "${Xms}" ]; then
-	echo "You did not specify any memory allocations, You need to make sure -Xms and -Xmx are set!"
+# also look at eula.txt
+chkeula=$(grep "false" "eula.txt")
+if [ ! "${Xmx}" ] || [ ! "${Xms}" ] || [ ! -z "${chkeula}" ]; then
+	echo "You did not specify any memory allocations, You need to make sure -Xms and -Xmx are set, or your eula is set to false!"
+	echo "EULA Setting: ${chkeula}"
 else
 	# Now check if the memory allocation contains letters .. if so then fail.
 	checkvar=$(echo "${Xms} ${Xmx}" | grep [^0-9])

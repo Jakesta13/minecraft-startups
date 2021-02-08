@@ -69,7 +69,7 @@ sed -e 's/"//g'
 counter=0
 ## ## ## ##
 # Running this in a 'While' loop so we can do first-run setup quickly, then start the server for real.
-while [ -z "${frun}" ]; then
+while [ -z "${frun}" ]; do
 #### #### Setup #### ####
 # This is to set up the directories and files required for a clean startup.
 if [ ! -d "plugins" ] && [ ! -e "eula.txt" ] && [ ! -e "server.properies" ] && [ ! -e "spigot.yml" ]; then

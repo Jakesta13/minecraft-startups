@@ -50,6 +50,11 @@ proxy="${16:-true}"
 ## spigot.yml setup
 # Player entity tracking range
 prange="${17:-256}"
+
+## ## Config load ## ##
+# Review variable names to put in config file
+source "uhc-config.conf"
+## ## ## ##
 ### ### ### ###
 # Syntax
 # ./uhc-start.sh paperupdate(y/n) mcver(1.16.5) jar(paperclip.jar) UHCupdate(y/n) UHCver(v1.18) Xmx(1024) Xms(1024) args(nogui) eula(false) levelseed(1234) world(world) view-distance(10) port(25565) whitelist(false) max-players(20) block-proxy-connections(true) player-tracking-range(256)

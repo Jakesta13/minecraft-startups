@@ -1,6 +1,6 @@
 #!/bin/bash
 # Add direct downloads to plugins you wish to download to "plugins.txt" and this script will download them.
-
+# Also, you can create a config file with the below vairbales, very useful if your control panel doesn't allow changing the startup parms after setup.
 ### ### Settings ### ###
 # Allow auto updates of paper?
 paperupdate="${1:-true}"
@@ -49,11 +49,12 @@ proxy="${16:-true}"
 
 ## spigot.yml setup
 # Player entity tracking range
-prange="${17:-256}"
+prange="${17:-28}"
 
 ## ## Config load ## ##
-# Review variable names to put in config file
-source "uhc-config.conf"
+if [ -f "uhc-config.conf" ]; then
+	source "uhc-config.conf"
+fi
 ## ## ## ##
 ### ### ### ###
 # Syntax

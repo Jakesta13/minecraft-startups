@@ -2,7 +2,7 @@
 ## Settings ##
 # See VanillaVotifer.conf
 if [ ! -e "VanillaVotifer.conf" ]; then
-	wget --quiet ""
+	wget --quiet "https://github.com/Jakesta13/minecraft-startups/raw/master/VanillaVotifier/VanillaVotifier.conf"
 fi
 source VanillaVotifer.conf
 ## ##

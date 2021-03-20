@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 ## Settings ##
 # See VanillaVotifer.conf
 if [ ! -e "VanillaVotifer.conf" ]; then

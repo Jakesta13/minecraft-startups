@@ -1,7 +1,7 @@
 #!/bin/bash
 ## Settings ##
 # See VanillaVotifer.conf
-if [ ! -e "VanillaVotifer.conf" ]; then
+if [ ! -e "VanillaVotifier.conf" ]; then
 	wget --quiet "https://github.com/Jakesta13/minecraft-startups/raw/master/VanillaVotifier/VanillaVotifier.conf"
 fi
 . VanillaVotifer.conf

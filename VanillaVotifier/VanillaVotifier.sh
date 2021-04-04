@@ -40,4 +40,4 @@ while read -r line; do
 done
 
 # Run stage
-nice -n 10 java --Xms"${Xms}" --Xmx"${Xmx}" -jar "${filename}"
+nice -n 10 java --Xms"${Xms}" --Xmx"${Xmx}" -jar "${fileName}"

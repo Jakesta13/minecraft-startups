@@ -34,10 +34,10 @@ fi
 # Update VanillaVotifier conf stage
 ConfVer=$(cat "config.conf" | grep "config-version: ")
 echo "${ConfVer}" > "config.conf"
-cat "SecondConfig.conf"|
+cat "SecondConfg.conf"|
 while read -r line; do
 	echo "${line}" >> "config.conf"
 done
 
 # Run stage
-nice -n -10 java --Xms${Xms} --Xmx${Xmx} -jar VanillaVotifier.jar
+nice -n 10 java --Xms"${Xms}" --Xmx"${Xmx}" -jar "${filename}"

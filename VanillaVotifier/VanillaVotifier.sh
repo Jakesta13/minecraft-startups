@@ -4,8 +4,8 @@
 if [ ! -e "VanillaVotifer.conf" ]; then
 	wget --quiet "https://github.com/Jakesta13/minecraft-startups/raw/master/VanillaVotifier/VanillaVotifier.conf"
 fi
-source VanillaVotifer.conf
-fi [ ! -e "SecondConf.conf" ]; then
+. VanillaVotifer.conf
+if [ ! -e "SecondConf.conf" ]; then
 	touch "SecondConf.conf"
 fi
 ## ##

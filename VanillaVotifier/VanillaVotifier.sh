@@ -34,7 +34,7 @@ fi
 # Update VanillaVotifier conf stage
 ConfVer=$(cat "config.conf" | grep "config-version: ")
 echo "${ConfVer}" > "config.conf"
-cat "SecondConfg.conf"|
+cat "SecondConf.conf"|
 while read -r line; do
 	echo "${line}" >> "config.conf"
 done

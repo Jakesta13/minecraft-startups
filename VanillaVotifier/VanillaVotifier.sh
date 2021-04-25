@@ -32,11 +32,11 @@ else
 	fi
 fi
 # Update VanillaVotifier conf stage
-ConfVer=$(cat "config.conf" | grep "config-version: ")
-echo "${ConfVer}" > "config.conf"
+ConfVer=$(cat "config.yaml" | grep "config-version: ")
+echo "${ConfVer}" > "config.yaml"
 cat "SecondConf.conf"|
 while read -r line; do
-	echo "${line}" >> "config.conf"
+	echo "${line}" >> "config.yaml"
 done
 
 # Run stage

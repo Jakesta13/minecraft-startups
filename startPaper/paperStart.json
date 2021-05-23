@@ -1,0 +1,156 @@
+{
+  "name": "PaperMC startPaper",
+  "display": "PaperMC - startPaper Edition",
+  "type": "minecraft-java",
+  "install": [
+    {
+      "commands": [
+        "wget --quiet https://raw.githubusercontent.com/Jakesta13/minecraft-startups/master/startPaper/paperStart.sh -O paperStart.sh",
+        "chmod +x paperStart.sh"
+      ],
+      "type": "command"
+    },
+    {
+      "target": "start.conf",
+      "text": "paperUpdate=\"${paperupdate}\"\nminecraftVersion=\"${version}\"\njar=\"${filename}\"\nXmx=\"${xmx}\"\nXms=\"${xms}\"\narguments=\"${arguments}\"\neula=\"${eula}\"\nlevelSeed=\"${levelSeed}\"\nworld=\"${world}\"\ndistance=\"${distance}\"\nport=\"${port}\"\nqueryPort=\"${queryPort}\"\nwhitelist=\"${whitelist}\"\nmaxPlayers=\"${maxPlayers}\"\nproxy=\"${proxy}\"\nplayerTrackingRange=\"${playerTrackingRange}\"\ncommand=\"${command}\"",
+      "type": "writefile"
+    }
+  ],
+  "run": {
+    "stop": "stop",
+    "command": "./paperStart.sh",
+    "pre": [
+      {
+        "commands": [
+          "wget -N --quiet https://raw.githubusercontent.com/Jakesta13/minecraft-startups/master/startPaper/paperStart.sh -O paperStart.sh",
+          "chmod +x paperStart.sh"
+        ],
+        "type": "command"
+      },
+      {
+        "target": "start.conf",
+        "text": "paperUpdate=\"${paperupdate}\"\nminecraftVersion=\"${version}\"\njar=\"${filename}\"\nXmx=\"${xmx}\"\nXms=\"${xms}\"\narguments=\"${arguments}\"\neula=\"${eula}\"\nlevelSeed=\"${levelSeed}\"\nworld=\"${world}\"\ndistance=\"${distance}\"\nport=\"${port}\"\nqueryPort=\"${queryPort}\"\nwhitelist=\"${whitelist}\"\nmaxPlayers=\"${maxPlayers}\"\nproxy=\"${proxy}\"\nplayerTrackingRange=\"${playerTrackingRange}\"\ncommand=\"${command}\"",
+        "type": "writefile"
+      }
+    ],
+    "post": [],
+    "environmentVars": {}
+  },
+  "data": {
+    "arguments": {
+      "type": "string",
+      "desc": "Set Java arguments. Optional",
+      "display": "Java Arguments"
+    },
+    "command": {
+      "type": "string",
+      "desc": "Set the java command to run, lets you change the version.",
+      "display": "Java command",
+      "required": true,
+      "value": "java"
+    },
+    "distance": {
+      "type": "integer",
+      "desc": "Default is 10",
+      "display": "View Distance",
+      "required": true,
+      "value": "10"
+    },
+    "eula": {
+      "type": "boolean",
+      "desc": "Accept the <a href=\"https://www.minecraft.net/en-us/eula\">EULA</a>?",
+      "display": "EULA",
+      "required": true,
+      "value": "false"
+    },
+    "filename": {
+      "type": "string",
+      "display": "Jar Filename",
+      "required": true,
+      "value": "paperclip.jar"
+    },
+    "levelSeed": {
+      "type": "string",
+      "desc": "Leave blank for random world seed",
+      "display": "World Seed"
+    },
+    "maxPlayers": {
+      "type": "integer",
+      "display": "Max Players",
+      "required": true,
+      "value": "20"
+    },
+    "paperupdate": {
+      "type": "boolean",
+      "desc": "Toggle allowing paper to update per restart",
+      "display": "Update Paper",
+      "required": true,
+      "value": "true"
+    },
+    "playerTrackingRange": {
+      "type": "integer",
+      "desc": "<a href=\"https://www.spigotmc.org/wiki/spigot-configuration/\">Spigot.conf</a> setting",
+      "display": "Player Tracking Range",
+      "value": "28"
+    },
+    "port": {
+      "type": "integer",
+      "desc": "Defaults to 25565",
+      "display": "Server Port",
+      "required": true,
+      "value": "25565"
+    },
+    "proxy": {
+      "type": "boolean",
+      "display": "Prevent Proxy Connections",
+      "required": true,
+      "value": "true"
+    },
+    "queryPort": {
+      "type": "integer",
+      "desc": "Usually the same as Server Port",
+      "display": "Query Port",
+      "required": true,
+      "value": "25565"
+    },
+    "version": {
+      "type": "string",
+      "desc": "Set the version of Minecraft for paper to download",
+      "display": "Minecraft Version",
+      "required": true,
+      "value": "1.16.5"
+    },
+    "whitelist": {
+      "type": "boolean",
+      "desc": "Toggle the whitelist",
+      "display": "Whitelist",
+      "value": "false"
+    },
+    "world": {
+      "type": "string",
+      "desc": "Leave blank to default to 'world'",
+      "display": "World Name",
+      "value": "world"
+    },
+    "xms": {
+      "type": "integer",
+      "desc": "Set the minimum assigned memory in MB, usually the same as Max Memory",
+      "display": "Minimum assigned memory",
+      "required": true,
+      "value": "1024"
+    },
+    "xmx": {
+      "type": "integer",
+      "desc": "Set the max assigned memory in MB",
+      "display": "Max assigned memory",
+      "required": true,
+      "value": "1024"
+    }
+  },
+  "supportedEnvironments": [
+    {
+      "networkMode": "host",
+      "type": "standard"
+    }
+  ]
+}

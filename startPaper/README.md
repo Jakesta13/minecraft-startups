@@ -88,3 +88,8 @@ proxy=true
 ``
 playerTrackingRange=28
 ``
+* Sets the java command to start the server with. Good for when you want to change versions, some plugins break with Java 16
+
+``
+command=java
+``

@@ -56,6 +56,8 @@ proxy="true"
 ## spigot.yml setup ##
 # Player entity tracking range
 playerTrackingRange="28"
+## Java Command (Good for if you wish to change the java version than what is default on your system in case plugins break)
+command="java"
 
 ## ## Config load ## ##
 # Check if conf exits, if not then use above settings.
@@ -139,15 +141,15 @@ if [ -n "${Xmx}" ] || [ -n "${Xms}" ] || [ -z "${chkeula}" ]; then
 		if [ -n "${frun}" ]; then
 			echo "First run, Starting and stopping server to initilize spigot.yml"
 			sleep 1
-			echo "stop" | java -Xmx"${Xmx}"M -Xms"${Xms}"M -jar "${jar}" nogui
+			echo "stop" | "${command}" -Xmx"${Xmx}"M -Xms"${Xms}"M -jar "${jar}" nogui
 			sleep 1
 		# If not first run, then start normally.
 		else
 			# If no arguments, then start the server as-is
 			if [ -z "${arguments}" ]; then
-				java -Xmx"${Xmx}"M -Xms"${Xms}"M -jar "${jar}" nogui
+				"${command}" -Xmx"${Xmx}"M -Xms"${Xms}"M -jar "${jar}" nogui
 			else
-				java -Xmx"${Xmx}"M -Xms"${Xms}"M -jar "${jar}" "${arguments}" nogui
+				"${command}" -Xmx"${Xmx}"M -Xms"${Xms}"M -jar "${jar}" "${arguments}" nogui
 			fi
 		fi
 	else

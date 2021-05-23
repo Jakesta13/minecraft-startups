@@ -89,7 +89,7 @@ if [ ! -d "plugins" ] && [ ! -e "eula.txt" ] && [ ! -e "server.properies" ] && [
 else
 	# if files exist, then just update the configs.
 	sed -i -e "s/level-seed=.*$/level-seed=${levelSeed}/" -e "s/level-name=.*$/level-name=${world}/" -e "s/view-distance=.*$/view-distance=${distance}/" -e "s/server-port=.*$/server-port=${port}/" -e "s/query.port=.*/query.port=${queryPort}/" -e "s/white-list=.*$/white-list=${whitelist}/" -e "s/max-players=.*$/max-players=${maxPlayers}/" -e "s/prevent-proxy-connections=.*$/prevent-proxy-connections=${proxy}/" -e 's/"//g' "server.properties"
-	sed -i -e "s/players: .*$/players: ${playerTrackingRange}/" -e "s/restart-script:.*/restart-script: paperStart.sh/" -e 's/"//g' "spigot.yml"
+	sed -i -e "s/players: .*$/players: ${playerTrackingRange}/" -e "s/restart-script:.*/restart-script: \.\/paperStart.sh/" -e 's/"//g' "spigot.yml"
 	sed -i -e "s/eula=.*/eula=${eula}/" -e 's/"//g' "eula.txt"
 fi
 #### #### #### ####

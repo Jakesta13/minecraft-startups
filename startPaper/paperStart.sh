@@ -67,7 +67,7 @@ fi
 ## ## Functions ## ##
 # Removes all double-quotes from any input
 fixquotes () {
-sed -e 's/"//g'
+sed -e 's/"//g' -e '/<nil>/d'
 }
 # Set the counter if it doesnt exist
 if [ -z "${counter}" ]; then

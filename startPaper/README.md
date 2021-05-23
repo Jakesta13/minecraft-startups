@@ -1,5 +1,6 @@
 # startPaper
-For notmal setups just download startPaper.sh and, preferably, create a start.conf with the following vairbales set.
+For notmal setups just download startPaper.sh and, preferably, create a start.conf with the following [variables set](#variable-descriptions).
+If you are using Pufferpanel, copy/paste the JSON file into a new Template.
 
 For use with [PufferPanel](https://github.com/PufferPanel/PufferPanel), you can Copy/Paste the JSON file named startPaper.json and tweak it on PufferPanel's Template page.
 ## Note

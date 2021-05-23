@@ -3,11 +3,11 @@ For notmal setups just download startPaper.sh and, preferably, create a start.co
 
 For use with [PufferPanel](https://github.com/PufferPanel/PufferPanel), you can Copy/Paste the JSON file named startPaper.json and tweak it on PufferPanel's Template page.
 ## Note
-* You will need to edit the config instead of the server.properties for the vairables below....
+* You will need to edit the config instead of the server.properties for the variables below....
 * You will also need to edit the config instead of spigot.conf for playerTrackingRange.
 
 
-## Vairable Descriptions
+## Variable Descriptions
 * Enables paper to update to the latest build of the version mentioned below.
 
 ``
